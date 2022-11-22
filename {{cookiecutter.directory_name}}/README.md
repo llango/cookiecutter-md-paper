@@ -1,51 +1,51 @@
 # {{ cookiecutter.title }}
 
-## Requirements
+## 依赖
 
-To render the paper, you will need:
+要渲染论文，您需要:
 
 1. pandoc
 2. pandoc-citeproc
 3. LaTeX
-4. Node.js (optional, for linting and using shortcuts via `npm run`)
+4. Node.js (可选，用于检查和使用快捷方式，可以通过 `npm run` 操作)
 
-For more information, take a look at Pandoc's [installation instructions](https://pandoc.org/installing.html).
+有关详细信息，请查看 Pandoc 的 [安装说明](https://pandoc.org/installing.html).
 
 {% if cookiecutter.use_linter == "y"-%}
-Next, install the dependencies for linting:
+接下来，安装 linting 的依赖项:
 
 ```
 npm install
 ```
 {%- endif %}
 
-## Usage
+## 用法
 
-Within this directory, run:
+在此目录中，运行：
 
 ```shell
-# to generate a PDF
-pandoc paper.md --filter pandoc-citeproc -o paper.pdf
-# or use this shortcut
+# 生成pdf， 注意指定pdf-engine
+pandoc paper.md --filter pandoc-citeproc -o paper.pdf --pdf-engine=xelatex
+# 简写模式
 npm run pdf
 
-# to generate a Word file
+# 生成word文件
 pandoc paper.md --filter pandoc-citeproc -o paper.docx
-# or use this shortcut
+# 简写模式
 npm run docx
 
 {% if cookiecutter.use_linter == "y" -%}
-# to find possible mistakes in your paper
+# 找出你论文中可能的错误
 npm run lint
 
-# to automatically fix these mistakes and prettify the file
+# 自动修复这些错误并美化文件
 npm run fix
 {%- endif %}
 ```
 {% if cookiecutter.use_linter == "y"-%}
 
-Note that you should include your references *within* the periods to ensure that the linter (which keeps sentences on different lines for more informative diffs) doesn't break them up:
+请注意，您应该 *within* 包含您的参考文献，以确保 linter（将句子保持在不同行以获得更多信息差异）不会将它们分解： 
 ```
-Like this [@Lee2019]. Not this. [@Lee2019]
+比如 [@Lee2019]. 而不是. [@Lee2019]
 ```
 {%- endif %}
